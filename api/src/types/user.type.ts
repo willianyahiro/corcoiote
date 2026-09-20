@@ -6,4 +6,6 @@ export type User = {
 }
 
 export type CreateUser = Omit<User, 'id'>;
-export type UpdateUser = Partial<CreateUser>;
+export type UpdateUser = Partial<CreateUser>; 
+
+
