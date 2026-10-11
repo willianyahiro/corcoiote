@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang='pt-br'>
+    <head>
+        <meta charset="UTF-8">
+        <title>Corcoiote</title>
+    </head>
+    <body>
+
+        <div></div>
+
+        <script 
+            crossorigin
+             src="https://unpkg.com/react@18/umd/react.development.js">
+        </script>
+
+        <script 
+            crossorigin 
+            src="https://unpkg.com/react-dom@18/umd/react-dom.development.js">
+        </script>
+
+        <script 
+            crossorigin
+            src='https://unpkg.com/@babel/standalone/babel.min.js'>
+        </script>
+  
+        <script type= 'text/babel'>
+            const container = document.querySelector('div');
+
+            const root = ReactDOM.createRoot(container);
+
+            const Title = () => {
+                return <h1>Corcoiote</h1>;
+            };
+
+            
+            const Paragraph = () => {
+                return <p>bem vindo ao curso de react.</p>;
+            };
+            
+            function App () {
+                return <>
+                    <Title/>
+                    <Paragraph/>
+                </>;
+            }
+
+           root.render(<App/>);
+        </script>
+    </body>
+</html>
