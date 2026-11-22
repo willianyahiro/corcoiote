@@ -1,46 +1,37 @@
-import { Invoice } from './invoice.ts';
+import { useState, useEffect } from 'react';
 
 import InvoiceTable from './InvoiceTable.tsx';
 
-const invoices: Invoice[] = [{
-  id: 1,
-  amount: 125037,
-  status: 'paid',
-  issueDate: '2026-09-15',
-  dueDate: '2026-10-16',
-  customer: {
-    id: 2,
-    name: 'Construtora Meridiano',
-    email: 'comercial@meridiano.com.br'
-  }
-}, {
-  id: 3,
-  amount: 93750,
-  status: 'pending',
-  issueDate: '2026-10-01',
-  dueDate: '2026-11-03',
-  customer: {
-    id: 5,
-    name: 'Gráfica Nova Vida',
-    email: 'grafica@novavida.com.br'
-  }
-}, {
-  id: 4,
-  amount: 1375336,
-  status: 'pending',
-  issueDate: '2026-10-10',
-  dueDate: '2026-11-25',
-  customer: {
-    id: 3,
-    name: 'Aly Som',
-    email: 'cotato@alysom.com.br'
-  }
-}];
-
 export default function App() {
+  const [invoices, setInvoices] = useState([]);
+  const [loading, setLoading] = useState (true);
+  const [error, setError] = useState('');
+
+  async function getInvoices() {
+    try{
+      const response = await fetch('/api/invoices');
+      if (!response.ok) throw new Error();
+
+     const datas = await response.json();
+
+      
+
+
+    setInvoices(datas);
+    } catch {
+      setError('Não  foi possivel obter relação de faturas.');
+    }finally {
+      setLoading(false)
+    }
+  }
+
+    useEffect(() => {getInvoices()} , []);
+
   return <>
     <h1>Faturas</h1>
 
-    <InvoiceTable datas={invoices} />
+    {loading ? <p> Carregando...</p>: (
+      error ? <p>{error}</p> : <InvoiceTable datas={invoices}/>)}
+
   </>;
 }
